@@ -7,9 +7,11 @@
 
 echo
 
-# Fetch the latest master of the APC script
-echo "1. Fetching the APC script from git.php.net, it's a just a small file..."
-wget -q -O apc.php http://git.php.net/?p=pecl/caching/apc.git;a=blob_plain;f=apc.php;hb=HEAD
+# Fetch a shallow clone from the latest master of APC
+echo "1. Fetching the APC repo from git.php.net, around a 300Kb download..."
+git clone --quiet --depth 1 https://git.php.net/repository/pecl/caching/apc.git && \
+	cp apc/apc.php . && \
+	rm -rf apc
 
 echo "2. Writing an htaccess file..."
 FOLDER=`pwd` && cat htaccess.txt | sed -e "s|__PWD__|$FOLDER|" > .htaccess
