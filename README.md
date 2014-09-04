@@ -1,12 +1,13 @@
 Server monitor
 ===
 
-These are a couple of scripts I use to keep an eye on a simple VPS - I'm making
+These are a few scripts I use to keep an eye on a simple VPS - I'm making
 it public partly for my convenience, and it might even be useful for someone
 else. It has:
 
 - a proxy to Apache's server-status feature
 - APC's stats script
+- a phpinfo() script
 - password protection
 
 To use it you'll need:
