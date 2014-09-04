@@ -3,8 +3,9 @@ AuthName "Restricted Access"
 AuthUserFile __PWD__/passwords
 Require valid-user
 
-<Files 'passwords'>
+# Hide files not for HTTP consumption
+<FilesMatch passwords|README\.md|LICENSE|htaccess\.txt|setup\.sh>
         Order allow,deny
         Deny from all
-</Files>
+</FilesMatch>
 
