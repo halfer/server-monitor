@@ -17,9 +17,9 @@ To use it you'll need:
 
 To install it, just do:
 
-- git-clone this repo
-- cd to the server-monitor folder
-- run setup.sh
+- `git clone` this repo
+- `cd` to the server-monitor folder
+- run `./setup.sh`
 
 It'll set up an htaccess file and get the APC script for you (so you don't have
 to trust a copy provided here, and so it is always the latest version). You'll
