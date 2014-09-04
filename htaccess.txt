@@ -1,0 +1,10 @@
+AuthType Basic
+AuthName "Restricted Access"
+AuthUserFile __PWD__/passwords
+Require valid-user
+
+<Files 'passwords'>
+        Order allow,deny
+        Deny from all
+</Files>
+

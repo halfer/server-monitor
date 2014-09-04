@@ -1,0 +1,6 @@
+; Don't record these files, they're generated
+passwords
+.htaccess
+
+; This is fetched from its repo, so don't get this either
+apc.php
