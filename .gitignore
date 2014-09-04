@@ -4,3 +4,6 @@ passwords
 
 ; This is fetched from its repo, so don't get this either
 apc.php
+
+; Ignore editors
+/nbproject/
