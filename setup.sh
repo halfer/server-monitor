@@ -23,8 +23,8 @@ echo -e "\
 
 	# Allow indexed folders
 	Options Indexes
-	# Allow passwording, allow allow/deny
-	AllowOverride AuthConfig Limit
+	# Allow passwording, allow allow/deny, allow php_value
+	AllowOverride AuthConfig Limit Options
 
 4. You need to set a password. You can use something simple like
    this (drop the -c if you are not creating the file for the first time):
