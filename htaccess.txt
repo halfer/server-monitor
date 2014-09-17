@@ -9,3 +9,5 @@ Require valid-user
         Deny from all
 </FilesMatch>
 
+# Let's not chomp on the RAM
+php_value memory_limit 1M
