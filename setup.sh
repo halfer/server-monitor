@@ -7,6 +7,10 @@
 
 echo
 
+# Save pwd and then change dir to this location
+STARTDIR=`pwd`
+cd `dirname $0`
+
 # Fetch a shallow clone from the latest master of APC
 echo "1. Fetching the APC repo from git.php.net, around a 300Kb download..."
 git clone --quiet --depth 1 https://git.php.net/repository/pecl/caching/apc.git && \
@@ -31,3 +35,6 @@ echo -e "\
 
 	htpasswd -c passwords <username>
 "
+
+# Go back to original dir
+cd $STARTDIR 
