@@ -5,20 +5,43 @@
 # your server. It is usually available only to localhost, so we
 # proxy it in the apache.php script.
 
+# If we do nothing then exit with an error, to add idempotency to
+# server orchestration scripts
+RETURN_VALUE=1
+
 echo
 
 # Save pwd and then change dir to this location
 STARTDIR=`pwd`
 cd `dirname $0`
 
-# Fetch a shallow clone from the latest master of APC
-echo "1. Fetching the APC repo from git.php.net, around a 300Kb download..."
-git clone --quiet --depth 1 https://git.php.net/repository/pecl/caching/apc.git && \
-	cp apc/apc.php . && \
-	rm -rf apc
+if [ -f apc.php ]; then
 
-echo "2. Writing an htaccess file..."
-FOLDER=`pwd` && cat htaccess.txt | sed -e "s|__PWD__|$FOLDER|" > .htaccess
+	echo "1. The APC script is already set up"
+
+else
+
+	# Fetch a shallow clone from the latest master of APC
+	echo "1. Fetching the APC repo from git.php.net, around a 300Kb download..."
+	git clone --quiet --depth 1 https://git.php.net/repository/pecl/caching/apc.git && \
+		cp apc/apc.php . && \
+		rm -rf apc
+
+	RETURN_VALUE=0
+
+fi
+
+if [ -f apc.php ]; then
+
+	echo "2. The .htaccess file is already set up"
+
+else
+
+	echo "2. Writing an htaccess file..."
+	FOLDER=`pwd` && cat htaccess.txt | sed -e "s|__PWD__|$FOLDER|" > .htaccess
+
+	RETURN_VALUE=0
+fi
 
 # Add some instructions
 echo -e "\
@@ -38,3 +61,6 @@ echo -e "\
 
 # Go back to original dir
 cd $STARTDIR 
+
+# Returns success/error
+exit $RETURN_VALUE
