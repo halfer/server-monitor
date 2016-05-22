@@ -5,9 +5,14 @@
 # your server. It is usually available only to localhost, so we
 # proxy it in the apache.php script.
 
-# If we do nothing then exit with an error, to add idempotency to
+# If we do nothing then exit with a standard message, to add idempotency to
 # server orchestration scripts
-RETURN_VALUE=1
+if [ -f apc.php ] && [ -f .htaccess ]; then
+
+	echo "Set up already"
+	exit
+
+fi
 
 echo
 
@@ -27,11 +32,9 @@ else
 		cp apc/apc.php . && \
 		rm -rf apc
 
-	RETURN_VALUE=0
-
 fi
 
-if [ -f apc.php ]; then
+if [ -f .htaccess ]; then
 
 	echo "2. The .htaccess file is already set up"
 
@@ -40,7 +43,6 @@ else
 	echo "2. Writing an htaccess file..."
 	FOLDER=`pwd` && cat htaccess.txt | sed -e "s|__PWD__|$FOLDER|" > .htaccess
 
-	RETURN_VALUE=0
 fi
 
 # Add some instructions
@@ -61,6 +63,3 @@ echo -e "\
 
 # Go back to original dir
 cd $STARTDIR 
-
-# Returns success/error
-exit $RETURN_VALUE
