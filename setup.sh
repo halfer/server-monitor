@@ -5,6 +5,10 @@
 # your server. It is usually available only to localhost, so we
 # proxy it in the apache.php script.
 
+# Save pwd and then change dir to this location
+STARTDIR=`pwd`
+cd `dirname $0`
+
 # If we do nothing then exit with a standard message, to add idempotency to
 # server orchestration scripts
 if [ -f apc.php ] && [ -f .htaccess ]; then
@@ -15,10 +19,6 @@ if [ -f apc.php ] && [ -f .htaccess ]; then
 fi
 
 echo
-
-# Save pwd and then change dir to this location
-STARTDIR=`pwd`
-cd `dirname $0`
 
 if [ -f apc.php ]; then
 
